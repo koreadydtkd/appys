@@ -4,164 +4,116 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="1인 앱 개발회사 appys. Android Native와 Supabase 기반으로 기획부터 개발·운영까지 책임집니다." />
+  <meta name="google-site-verification" content="T5gVXfpSbI6TBhPbc2ESHRZ_AAQpCev3litzBhxbnOk" />
   <title>appys</title>
+
   <style>
     :root{
       --bg:#0b0f17;
-      --card:#0f1626;
+      --panel:rgba(255,255,255,.05);
+      --line:rgba(255,255,255,.12);
       --text:#e9eefb;
       --muted:#a7b3d0;
-      --line:rgba(255,255,255,.12);
       --accent:#E6BC47;
+      --r:18px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
                    "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(230,188,71,.25), transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, rgba(100,180,255,.18), transparent 55%),
+        radial-gradient(1200px 600px at 20% -10%, rgba(230,188,71,.22), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(100,180,255,.16), transparent 55%),
         var(--bg);
     }
     a{color:inherit}
-    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 48px}
-    header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:10px 0 18px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight:800; letter-spacing:.2px;
-    }
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 48px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px}
     .logo{
-      width:38px; height:38px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(230,188,71,.95), rgba(230,188,71,.35));
-      box-shadow: 0 10px 30px rgba(230,188,71,.22);
-      position:relative; overflow:hidden;
+      width:36px;height:36px;border-radius:12px;
+      background:linear-gradient(135deg, rgba(230,188,71,.95), rgba(230,188,71,.35));
+      box-shadow:0 10px 30px rgba(230,188,71,.18);
     }
-    .logo:after{
-      content:""; position:absolute; inset:-40%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
-      transform: rotate(20deg);
-      animation: shine 2.8s ease-in-out infinite;
-    }
-    @keyframes shine{
-      0%,55%{transform: translateX(-30%) rotate(20deg); opacity:.0}
-      70%{opacity:.65}
-      100%{transform: translateX(40%) rotate(20deg); opacity:0}
-    }
-    nav a{
-      text-decoration:none;
-      padding:10px 12px; border-radius:12px;
-      border:1px solid transparent;
-      color:var(--muted);
-    }
-    nav a:hover{border-color:var(--line); color:var(--text)}
-    .hero{
+
+    .panel{
+      margin-top:16px;
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border-radius:22px;
-      padding:28px 22px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      padding:26px 20px;
+      box-shadow:0 18px 50px rgba(0,0,0,.35);
     }
+
     .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 11px;
-      border-radius:999px;
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 11px;border-radius:999px;
       border:1px solid rgba(230,188,71,.45);
-      background: rgba(230,188,71,.10);
-      color: var(--text);
+      background:rgba(230,188,71,.10);
       font-size:13px;
     }
     .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-    h1{
-      margin:14px 0 10px;
-      font-size:40px; line-height:1.12;
-      letter-spacing:-.5px;
-    }
+    h1{margin:14px 0 10px;font-size:40px;line-height:1.12;letter-spacing:-.5px}
+
     .lead{
-      margin:0;
-      color:var(--muted);
-      font-size:16.5px;
-      line-height:1.8;
-      max-width:58ch;
-      white-space:pre-line;
+      margin:0;color:var(--muted);
+      font-size:16.5px;line-height:1.85;
+      max-width:60ch;white-space:pre-line;
     }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:16px;
-      margin-top:16px;
-    }
-    .card{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background: rgba(15,22,38,.7);
-      padding:16px 16px 14px;
-    }
-    .card h2{
-      margin:0 0 8px;
-      font-size:16px;
-      letter-spacing:-.2px;
-    }
-    .card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:14.5px;
-      white-space:pre-line;
-    }
-    .cta{
-      display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;
-    }
+
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:11px 14px;
-      border-radius:14px;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:11px 14px;border-radius:14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      text-decoration:none;
-      font-weight:650;
+      background:rgba(255,255,255,.04);
+      text-decoration:none;font-weight:650;
     }
     .btn.primary{
-      border-color: rgba(230,188,71,.55);
-      background: rgba(230,188,71,.12);
+      border-color:rgba(230,188,71,.55);
+      background:rgba(230,188,71,.12);
     }
     .btn:hover{filter:brightness(1.08)}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    .box{
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:var(--r);
+      padding:14px 14px 12px;
+    }
+    .box h2{margin:0 0 6px;font-size:15px}
+    .box p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.7;white-space:pre-line}
+
     footer{
       margin-top:18px;
       color:var(--muted);
       font-size:13px;
-      line-height:1.7;
-      padding:18px 4px 0;
+      padding:14px 4px 0;
+      border-top:1px solid var(--line);
     }
-    .sep{height:1px;background:var(--line);margin:18px 0 14px}
-    @media (max-width: 820px){
+
+    @media (max-width:820px){
       h1{font-size:34px}
       .grid{grid-template-columns:1fr}
-      nav{display:none}
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <header>
-      <div class="brand" aria-label="appys">
+    <div class="row" aria-label="header">
+      <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div>appys</div>
       </div>
-      <nav>
-        <a href="#about">소개</a>
-        <a href="#contact">문의</a>
-      </nav>
-    </header>
+    </div>
 
-    <main class="hero">
+    <main class="panel">
       <span class="badge"><span class="dot" aria-hidden="true"></span> 1인 앱 개발회사</span>
-      <h1 id="about">appys</h1>
+      <h1>appys</h1>
 
       <p class="lead">안녕하세요.
 1인 앱 개발회사 appys 입니다.
@@ -173,33 +125,28 @@ Android Native와 Supabase 기반의 안정적인 시스템을 바탕으로,
 
 감사합니다.</p>
 
-      <div class="cta" id="contact">
-        <a class="btn primary" href="mailto:appys.dev@gmail.com">✉️ 문의하기 (Email)</a>
-        <a class="btn" href="#company">🏢 회사정보</a>
+      <div class="actions">
+        <a class="btn primary" href="mailto:appys.dev@gmail.com">✉️ 문의하기</a>
+        <a class="btn" href="#info">🏢 회사정보</a>
       </div>
 
-      <div class="grid" style="margin-top:16px">
-        <section class="card" id="company">
+      <section class="grid" id="info">
+        <div class="box">
           <h2>회사 정보</h2>
           <p>애피스 대표이사 : 한용상 | 사업자 등록번호 : 812-18-02648
 사업장주소 : 경기도 남양주시 경춘로 460</p>
-        </section>
-
-        <section class="card">
+        </div>
+        <div class="box">
           <h2>연락처</h2>
           <p>문의 : <a href="mailto:appys.dev@gmail.com">appys.dev@gmail.com</a></p>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
 
-    <footer>
-      <div class="sep"></div>
-      <div>© <span id="y"></span> appys. All rights reserved.</div>
-    </footer>
+    <footer>© <span id="y"></span> appys. All rights reserved.</footer>
   </div>
 
   <script>
-    // 연도 자동 표기
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
